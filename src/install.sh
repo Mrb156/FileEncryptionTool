@@ -10,6 +10,9 @@ echo export PATH=$DIR:\$PATH >> $HOME/.bashrc
 mv encrypt_file.py encryption-tool
 chmod +x encryption-tool
 
+mv zipper.py compress-tool
+chmod +x compress-tool
+
 # Check if pip is installed, and install it if necessary
 if ! command -v pip &> /dev/null; then
     echo -e $RED "Installing pip..." $NORMAL
