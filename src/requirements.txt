@@ -1,2 +1,4 @@
 cryptography
 pyAesCrypt
+zipfile
+glob
