@@ -22,7 +22,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     if args.type == "en":
-        encryptFile(args.input_file, args.output_file, args.password, args.algorithm)
+        encryptFile(args.input_file, args.output_file, args.password)
     elif args.type == "de":
-        decryptFile(args.input_file, args.output_file, args.password, args.algorithm)
+        decryptFile(args.input_file, args.output_file, args.password)
 
