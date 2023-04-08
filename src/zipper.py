@@ -15,10 +15,15 @@ def zipInfo(input):
 
 def compressFile(input, output):
     with zipfile.ZipFile(output, 'w') as zip:
-        print("Compressing: {}".format(input))
-        for file in glob.glob(input):
-            zip.write(file)
-        print("Compressed to: {}".format(output))
+        if(os.path.isdir(input)):
+            print("Compressing: {}".format(input))
+            for file in glob.glob(input+'/"*"'):
+                zip.write(file)
+            print("Compressed to: {}".format(output))
+        else:
+            for file in glob.glob(input):
+                zip.write(file)
+            print("Compressed to: {}".format(output))
         
 
 def extractFile(input, output = ""):
