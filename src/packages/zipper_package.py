@@ -6,7 +6,7 @@ import glob
 import os
 import maskpass
 
-from packages.encrypt_file_package import encryptFile
+from encrypt_file import encryptFile
 
 def zipInfo(input):
     with zipfile.ZipFile(input, 'r') as file:
