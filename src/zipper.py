@@ -4,6 +4,9 @@ import argparse
 import zipfile
 import glob
 import os
+import maskpass
+
+from encrypt_file import encryptFile
 
 def zipInfo(input):
     with zipfile.ZipFile(input, 'r') as file:
@@ -36,6 +39,7 @@ if __name__ == '__main__':
     parser.add_argument('-t', '--type', type=str, choices=['comp', 'ext'], help='Do you want to compress or extract?')
     parser.add_argument('-in', '--input_file', type=str, help='Which file(s) you want to compress. You can add a suffix as well.')
     parser.add_argument('-out','--output_file', type=str, help='Name of the compressed output zip folder.')
+    parser.add_argument('-e','--encrypt', action="store_true", help='Encrypt the folder.')
     args = parser.parse_args()
     if args.info:
         try:
@@ -46,6 +50,14 @@ if __name__ == '__main__':
         if args.type == 'comp':
             try:
                 compressFile(args.input_file, args.output_file)
+                if args.encrypt:
+                    output_file = input('Output file path/ name: ')
+                    password = maskpass.askpass(prompt = 'Password: ', mask="")
+                    try:
+                        encryptFile(args.output_file, output_file, password)
+                        print('Successfully encrypted. You can decrypt this file with the decrypt method.')
+                    except:
+                        print("Unable to encrypt.")
             except:
                 print("An error occured. Check your inputs!")
         elif args.type == 'ext':
@@ -53,6 +65,8 @@ if __name__ == '__main__':
                 extractFile(args.input_file, args.output_file)
             except:
                 print("Error while extracting a file.")
+        
+
 
         if args.delete:
             try:
