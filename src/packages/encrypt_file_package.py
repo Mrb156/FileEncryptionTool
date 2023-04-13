@@ -6,11 +6,9 @@ import os
 
 def encryptFile(input_file, output_file, password):
     pyAesCrypt.encryptFile(input_file, output_file, password)
-    os.remove(input_file)
     
 def decryptFile(input_file, output_file, password):
     pyAesCrypt.decryptFile(input_file, output_file, password)
-    os.remove(input_file)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Encrypt or decrypt a file.')
