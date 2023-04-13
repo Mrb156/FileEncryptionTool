@@ -35,8 +35,10 @@ def extractFile(input, output):
         print('Done!')
 
 def deleteFiles(input):
-    for file in glob.glob(input):
-        os.remove(file)
+        os.remove('rm -rf '+ input)
+
+    # for file in glob.glob(input):
+    #     os.remove(file)
         
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Zip files/ directories.')
