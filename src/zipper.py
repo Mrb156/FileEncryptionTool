@@ -14,7 +14,7 @@ def zipInfo(input):
             print(info.filename)
 
 def compressFile(input, output):
-    with zipfile.ZipFile(output, 'w') as zip:
+    with zipfile.ZipFile(output, 'w', zipfile.ZIP_DEFLATED, compresslevel=9) as zip:
         if(os.path.isdir(input)):
             input = input+"/*"
             print("Compressing: {}".format(input))
