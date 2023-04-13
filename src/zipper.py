@@ -5,6 +5,7 @@ import zipfile
 import glob
 import os
 import maskpass
+import shutil
 
 from packages.encrypt_file_package import encryptFile
 
@@ -35,10 +36,7 @@ def extractFile(input, output):
         print('Done!')
 
 def deleteFiles(input):
-        os.remove('rm -rf '+ input)
-
-    # for file in glob.glob(input):
-    #     os.remove(file)
+    shutil.rmtree(input)
         
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Zip files/ directories.')
