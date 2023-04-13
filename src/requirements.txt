@@ -1,9 +1,3 @@
 cryptography
 pyAesCrypt
 maskpass
-argparse
-zipfile
-glob
-os
-maskpass
-shutil
