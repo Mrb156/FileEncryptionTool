@@ -36,7 +36,10 @@ def extractFile(input, output):
         print('Done!')
 
 def deleteFiles(input):
-    shutil.rmtree(input)
+    if(os.path.isdir(input)):
+        shutil.rmtree(input)
+    else:
+        os.remove(input)
         
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Zip files/ directories.')
