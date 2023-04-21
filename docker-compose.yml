@@ -1,0 +1,8 @@
+version: '3'
+services:
+  linux:
+    build: .
+    volumes:
+      - .:/src
+    ports:
+      - "8000:8000"
