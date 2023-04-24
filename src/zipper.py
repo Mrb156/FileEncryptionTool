@@ -74,7 +74,7 @@ if __name__ == '__main__':
                     os.path.realpath(__name__)) + '/' + args.input_file + ".zip"
             elif args.output_file and not args.output_file.__contains__('.zip'):
                 if os.path.isdir(args.output_file):
-                    default_output_path = args.output_file + '/' + '.zip'
+                    default_output_path = args.output_file + '/' + args.input_file + '.zip'
                 else:
                     default_output_path = args.output_file + '.zip'  
             try:
