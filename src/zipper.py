@@ -67,13 +67,20 @@ if __name__ == '__main__':
             print("An error occured. Did you add an input file?")
     else:
         error = False
-
+        default_output_path = args.output_file
         if args.type == 'comp':
             if not args.output_file:
-                compressFile(args.input_file, os.path.dirname(
-                    os.path.realpath(__name__)))
+                default_output_path= os.path.dirname(
+                    os.path.realpath(__name__)) + ".zip"
+            elif args.output_file and args.output_file.find('.zip') == -1:    
+                default_output_path = args.output_file + '.zip'
             try:
-                compressFile(args.input_file, args.output_file)
+                compressFile(args.input_file, default_output_path)
+                if args.delete:
+                    try:
+                        deleteFiles(args.input_file)
+                    except:
+                        print("Error while removing a file.")
                 if args.encrypt:
                     output_file = input('The encrypted file path/ name: ')
                     password = maskpass.askpass(
@@ -91,14 +98,19 @@ if __name__ == '__main__':
                 error = True
                 print("An error occured. Check your inputs!")
         elif args.type == 'ext':
+            if not args.output_file:
+                default_output_path= os.path.dirname(
+                    os.path.realpath(__name__))
             try:
-                extractFile(args.input_file, args.output_file)
+                extractFile(args.input_file, default_output_path)
+                if args.delete:
+                    try:
+                        deleteFiles(args.input_file)
+                    except:
+                        print("Error while removing a file.")
             except:
                 error = True
                 print("Error while extracting a file.")
 
-        if args.delete and error:
-            try:
-                deleteFiles(args.input_file)
-            except:
-                print("Error while removing a file.")
+        if error:
+            print("An error occured.")
