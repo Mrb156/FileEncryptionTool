@@ -66,14 +66,17 @@ if __name__ == '__main__':
         except:
             print("An error occured. Did you add an input file?")
     else:
-        error = False
+        
         default_output_path = args.output_file
         if args.type == 'comp':
             if not args.output_file:
                 default_output_path= os.path.dirname(
                     os.path.realpath(__name__)) + '/' + args.input_file + ".zip"
             elif args.output_file and not args.output_file.__contains__('.zip'):
-                default_output_path = args.output_file + '.zip'
+                if args.output_file.__contains__('/'):
+                    default_output_path = args.output_file + '/' + '.zip'
+                else:
+                    default_output_path = args.output_file + '.zip'  
             try:
                 compressFile(args.input_file, default_output_path)
                 if args.delete:
@@ -92,10 +95,8 @@ if __name__ == '__main__':
                         print(
                             'Successfully encrypted. You can decrypt this file with the decrypt method.')
                     except:
-                        error = True
                         print("Unable to encrypt.")
             except:
-                error = True
                 print("An error occured. Check your inputs!")
         elif args.type == 'ext':
             if not args.output_file:
@@ -109,8 +110,5 @@ if __name__ == '__main__':
                     except:
                         print("Error while removing a file.")
             except:
-                error = True
+            
                 print("Error while extracting a file.")
-
-        if error:
-            print("An error occured.")
