@@ -9,11 +9,11 @@ NORMAL="\033[0;39m"
 # Set global environment variable for the script
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 echo export PATH=$DIR:\$PATH >> $HOME/.bashrc
-mv encrypt_file.py encryption-tool
-chmod +x encryption-tool
+mv encrypt_file.py encrypt
+chmod +x encrypt
 
-mv zipper.py compress-tool
-chmod +x compress-tool
+mv zipper.py compress
+chmod +x compress
 
 # Check if pip is installed, and install it if necessary
 if ! command -v pip &> /dev/null; then
