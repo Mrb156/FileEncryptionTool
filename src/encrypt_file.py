@@ -17,7 +17,7 @@ def decryptFile(input_file, output_file):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Encrypt or decrypt a file.')
-    parser.add_argument('-t','--type', type=str,choices=['en','de'], help='Encrypt or decrypt.')
+    parser.add_argument('-t','--type', type=str,choices=['en','de'], help='Encrypt (en) or decrypt (de).')
     parser.add_argument('-in','--input_file', type=str, help='The input file to encrypt or decrypt.')
     parser.add_argument('-out', '--output_file', type=str, help='The output file to encrypt or decrypt.')
 

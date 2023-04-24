@@ -1,4 +1,6 @@
 #!/bin/bash
+echo Install python
+sudo apt-get install python3
 
 # Set color for commands
 RED="\033[31m"
