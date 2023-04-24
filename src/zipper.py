@@ -71,8 +71,8 @@ if __name__ == '__main__':
         if args.type == 'comp':
             if not args.output_file:
                 default_output_path= os.path.dirname(
-                    os.path.realpath(__name__)) + ".zip"
-            elif args.output_file and args.output_file.find('.zip') == -1:    
+                    os.path.realpath(__name__)) + '/' + args.input_file + ".zip"
+            elif args.output_file and args.output_file.find('.zip') == -1:
                 default_output_path = args.output_file + '.zip'
             try:
                 compressFile(args.input_file, default_output_path)
