@@ -14,9 +14,11 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 echo export PATH=$DIR:\$PATH >> $HOME/.bashrc
 
 # Rename the python files for easier access
+dos2unix encrypt_file.py
 mv encrypt_file.py encrypt
 chmod +x encrypt
 
+dos2unix zipper.py
 mv zipper.py compress
 chmod +x compress
 
