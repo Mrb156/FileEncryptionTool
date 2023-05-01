@@ -6,6 +6,7 @@ import glob
 import os
 import maskpass
 import shutil
+from datetime import datetime
 
 from packages.encrypt_file_package import encryptFile
 
@@ -13,20 +14,22 @@ from packages.encrypt_file_package import encryptFile
 def zipInfo(input):
     with zipfile.ZipFile(input, 'r') as file:
         for info in file.infolist():
-            print(info.filename)
+            print("{}\t {}\t {} bytes".format(info.filename, datetime(*info.date_time), info.compress_size))
 
 
 def compressFile(input, output):
     with zipfile.ZipFile(output, 'w', zipfile.ZIP_DEFLATED, compresslevel=9) as zip:
         if(os.path.isdir(input)):
-            input = input+"/*"
             print("Compressing: {}".format(input))
-            for file in glob.glob(input):
-                zip.write(file)
+            for path, directories, files in os.walk(input):
+                for file in files:
+                    file_name = os.path.join(path, file)
+                    zip.write(file_name)
             print("Compressed to: {}".format(output))
         else:
             for file in glob.glob(input):
                 zip.write(file)
+                print("{} compressed".format(file))
             print("Compressed to: {}".format(output))
 
 
