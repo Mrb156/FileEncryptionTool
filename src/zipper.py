@@ -45,7 +45,8 @@ def deleteFiles(input):
     if(os.path.isdir(input)):
         shutil.rmtree(input)
     else:
-        os.remove(input)
+        for file in glob.glob(input):
+            os.remove(file)
 
 
 if __name__ == '__main__':
@@ -67,9 +68,9 @@ if __name__ == '__main__':
         try:
             zipInfo(args.input_file)
         except:
-            print("An error occured. Did you add an input file?")
+            if not args.input_file:
+                print("Add an input file!")
     else:
-        
         default_output_path = args.output_file
         if args.type == 'comp':
             if not args.output_file:
@@ -79,7 +80,7 @@ if __name__ == '__main__':
                 if os.path.isdir(args.output_file):
                     default_output_path = args.output_file + '/' + args.input_file + '.zip'
                 else:
-                    default_output_path = args.output_file + '.zip'  
+                    default_output_path = args.output_file + '.zip'
             try:
                 compressFile(args.input_file, default_output_path)
                 if args.delete:
