@@ -5,8 +5,8 @@ RED="\033[31m"
 NORMAL="\033[0;39m"
 
 # Update system before installing
-sudo apt-get update
-sudo apt-get upgrade
+sudo apt-get -y update
+sudo apt-get -y upgrade
 
 # Install python
 echo Installing python
