@@ -28,7 +28,13 @@ def compressFile(input, output):
             print("Compressed to: {}".format(output))
         else:
             for file in glob.glob(input):
-                zip.write(file)
+                if(os.path.isdir(file)):
+                    print("Compressing: {}".format(file))
+                    for path, directories, files in os.walk(file):
+                        for file in files:
+                            file_name = os.path.join(path, file)
+                            zip.write(file_name)
+                    zip.write(file)
                 print("{} compressed".format(file))
             print("Compressed to: {}".format(output))
 
