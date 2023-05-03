@@ -30,3 +30,4 @@ fi
 # Install packages from requirements.txt
 echo -e $RED "Installing required packages..." $NORMAL
 pip install -r requirements.txt
+sudo apt-get install -r linux_requirements.txt
