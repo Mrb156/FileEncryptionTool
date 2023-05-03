@@ -29,4 +29,13 @@ if __name__ == '__main__':
             decryptFile(args.input_file, args.output_file)
     except:
         print('An error occured!')
+        if not args.type:
+            print("Specify a type!")
+        elif args.type != "en" or args.type != "de":
+            print("Wrong type name!")
+        if not args.input_file:
+            print("Add an input file!")
+        if not args.output_file:
+            print("Add an output file!")
+       
 
