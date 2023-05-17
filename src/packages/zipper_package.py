@@ -54,7 +54,7 @@ if __name__ == '__main__':
                     output_file = input('Output file path/ name: ')
                     password = maskpass.askpass(prompt = 'Password: ', mask="")
                     try:
-                        encryptFile(args.output_file, output_file, password)
+                        encryptFile(args.output_file, output_file)
                         deleteFiles(args.output_file)
                         print('Successfully encrypted. You can decrypt this file with the decrypt method.')
                     except:
