@@ -2,7 +2,6 @@
 
 import argparse
 import zipfile
-import glob
 import os
 import maskpass
 import shutil
@@ -24,17 +23,12 @@ def compressFile(input, output):
             for path, directories, files in os.walk(input):
                 for file in files:
                     file_name = os.path.join(path, file)
+                    print(file_name)
                     zip.write(file_name)
             print("Compressed to: {}".format(output))
         else:
-            for file in glob.glob(input):
-                if(os.path.isdir(file)):
-                    for path, directories, files in os.walk(file):
-                        for file in files:
-                            file_name = os.path.join(path, file)
-                            zip.write(file_name)
-                zip.write(file)
-                print("{} compressed".format(file))
+            zip.write(input)
+            print("{} compressed".format(input))
             print("Compressed to: {}".format(output))
 
 
@@ -50,8 +44,7 @@ def deleteFiles(input):
     if(os.path.isdir(input)):
         shutil.rmtree(input)
     else:
-        for file in glob.glob(input):
-            os.remove(file)
+        os.remove(input)
 
 
 if __name__ == '__main__':
@@ -63,7 +56,7 @@ if __name__ == '__main__':
     parser.add_argument('-t', '--type', type=str,
                         choices=['comp', 'ext'], help='Do you want to compress or extract?')
     parser.add_argument('-in', '--input_file', type=str,
-                        help='Which file(s) you want to compress. You can add a suffix as well.')
+                        help='Which file or folder do you want to compress?')
     parser.add_argument('-out', '--output_file', type=str,
                         help='Name of the compressed output zip folder.')
     parser.add_argument('-e', '--encrypt', action="store_true",
@@ -79,8 +72,11 @@ if __name__ == '__main__':
         default_output_path = args.output_file
         if args.type == 'comp':
             if not args.output_file:
+                inputFile = args.input_file
+                if os.path.isfile(inputFile):
+                    inputFile = args.input_file.split('.')[0]
                 default_output_path= os.path.dirname(
-                    os.path.realpath(__name__)) + '/' + args.input_file + ".zip"
+                    os.path.realpath(__name__)) + '/' + inputFile + ".zip"
             elif args.output_file and not args.output_file.__contains__('.zip'):
                 if os.path.isdir(args.output_file):
                     default_output_path = args.output_file + '/' + args.input_file + '.zip'

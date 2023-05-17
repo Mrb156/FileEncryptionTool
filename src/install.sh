@@ -34,4 +34,3 @@ fi
 # Install packages from requirements.txt
 echo -e $RED "Installing required packages..." $NORMAL
 pip install -r requirements.txt
-xargs sudo apt-get install -y <linux_requirements.txt
