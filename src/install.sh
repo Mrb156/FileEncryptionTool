@@ -46,10 +46,10 @@ case $yn in
         add_deps
         
         break;;
-    [nN] ) echo echo -e $ALERT Ok, installing only dependencies. $NORMAL;
+    [nN] ) echo -e $ALERT Ok, installing only dependencies. $NORMAL;
        add_deps
 
         break;;
-    * ) echo echo -e $ALERT invalid response;;
+    * ) echo -e $ALERT invalid response;;
 esac
 done
