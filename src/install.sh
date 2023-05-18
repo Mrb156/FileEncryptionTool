@@ -1,44 +1,55 @@
 #!/bin/bash
 
 # Set color for commands
-RED="\033[31m"
+ALERT="\033[0;35m"
 NORMAL="\033[0;39m"
+
+system_update(){
+    sudo apt-get -y update
+    sudo apt-get -y upgrade
+}
+
+add_deps(){
+    # Install python
+    echo Installing python
+    sudo apt-get install python3
+
+
+    # Set global environment variable for the script
+    DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+    echo export PATH=$DIR:\$PATH >> $HOME/.bashrc
+
+    # Rename the python files for easier access
+    mv encrypt_file.py encrypt
+    chmod +x encrypt
+
+    mv zipper.py compress
+    chmod +x compress
+
+    # Check if pip is installed, and install it if necessary
+    if ! command -v pip &> /dev/null; then
+        echo -e $ALERT "Installing pip..." $NORMAL
+        sudo apt-get update
+        sudo apt-get install -y python3-pip
+    fi
+
+    # Install packages from requirements.txt
+    echo -e $ALERT "Installing requiALERT packages..." $NORMAL
+    pip install -r requirements.txt
+}
 
 # Update system before installing
 read -p "I recommend to update your system before installing dependencies. Do you want to update the OS? (y/n) " yn
 case $yn in
-    [yY] ) echo Ok, I update the system.;
-        sudo apt-get -y update
-        sudo apt-get -y upgrade
+    [yY] ) echo -e $ALERT Ok, I update the system. $NORMAL;
+        system_update
+        add_deps
+        
         break;;
-    [nN] ) echo Ok, installing only dependencies.;
-        # Install python
-        echo Installing python
-        sudo apt-get install python3
+    [nN] ) echo echo -e $ALERT Ok, installing only dependencies. $NORMAL;
+       add_deps
 
-
-        # Set global environment variable for the script
-        DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-        echo export PATH=$DIR:\$PATH >> $HOME/.bashrc
-
-        # Rename the python files for easier access
-        mv encrypt_file.py encrypt
-        chmod +x encrypt
-
-        mv zipper.py compress
-        chmod +x compress
-
-        # Check if pip is installed, and install it if necessary
-        if ! command -v pip &> /dev/null; then
-            echo -e $RED "Installing pip..." $NORMAL
-            sudo apt-get update
-            sudo apt-get install -y python3-pip
-        fi
-
-        # Install packages from requirements.txt
-        echo -e $RED "Installing required packages..." $NORMAL
-        pip install -r requirements.txt
         break;;
-    * ) echo invalid response;;
+    * ) echo echo -e $ALERT invalid response;;
 esac
 done
