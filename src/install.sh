@@ -7,11 +7,11 @@ NORMAL="\033[0;39m"
 # Update system before installing
 read -p "I recommend to update your system before installing dependencies. Do you want to update the OS? (y/n) " yn
 case $yn in
-    [yY] ) echo Ok, proceeding;
+    [yY] ) echo Ok, I update the system.;
         sudo apt-get -y update
         sudo apt-get -y upgrade
         break;;
-    [nN] ) echo Exiting...;
+    [nN] ) echo Ok, installing only dependencies.;
         # Install python
         echo Installing python
         sudo apt-get install python3
