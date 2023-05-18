@@ -11,7 +11,7 @@ system_update(){
 
 add_deps(){
     # Install python
-    echo Installing python
+    echo -e $ALERT Installing python $NORMAL
     sudo apt-get install python3
 
 
