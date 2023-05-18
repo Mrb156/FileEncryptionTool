@@ -34,7 +34,7 @@ add_deps(){
     fi
 
     # Install packages from requirements.txt
-    echo -e $ALERT "Installing requiALERT packages..." $NORMAL
+    echo -e $ALERT "Installing required packages..." $NORMAL
     pip install -r requirements.txt
 }
 
