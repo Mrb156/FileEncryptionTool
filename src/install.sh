@@ -18,6 +18,8 @@ add_deps(){
     # Set global environment variable for the script
     DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
     echo export PATH=$DIR:\$PATH >> $HOME/.bashrc
+    echo source ~/.bashrc
+
 
     # Rename the python files for easier access
     mv encrypt_file.py encrypt
